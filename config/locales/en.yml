@@ -1,0 +1,5 @@
+# English strings go here for Rails i18n
+en:
+  my_label: "My label"
+  label_customer_new: "New Custoemr"
+  label_geo_info_new: "New GeoInfo"

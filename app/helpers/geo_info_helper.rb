@@ -1,0 +1,2 @@
+module GeoInfoHelper
+end

@@ -1,0 +1,5 @@
+<div class="contextual">
+  <%= link_to_if_authorized(l(:label_geo_info_new), 
+                            {:action => 'new', :project_id => @project}, 
+                            :class => 'icon icon-add') %>
+</div>
