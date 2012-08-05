@@ -1,3 +1,6 @@
+require "redmine"
+require_dependency "inquiry/hooks"
+
 Redmine::Plugin.register :inquiry do
   name 'Inquiry plugin'
   author 'Yoshiteru Takeshita'
@@ -14,5 +17,7 @@ Redmine::Plugin.register :inquiry do
     permission :geo_editor, :geo_info => [:new, :edit]
     permission :customer_editor, :customer => [:new, :edit]
   end
+  
+  
   
 end

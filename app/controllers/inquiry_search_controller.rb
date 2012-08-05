@@ -20,7 +20,19 @@ select * from customers where project_id = :pId and (
   address like :q );
 EOS
     @customers = Customer.find_by_sql([s, { :pId => @project.id, :q => likeStr}])
-    respond_with(@customers)
+    # map to json structure
+    list = []
+    
+    for c in @customers
+      list << {"id" => c.id, 
+        "name" => c.family_name + " " + c.first_name,
+        "family_name" => c.family_name, 
+        "first_name" => c.first_name,
+        "address" => c.address,
+        "phone_number" => c.phone_number}
+    end
+    
+    respond_with(list)
   end
   
 

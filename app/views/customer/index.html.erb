@@ -18,11 +18,7 @@
     
     $scope.change = function(si) {
       $http.get("customer/search.json?project_id=" + PROJECT_ID + "&q=" + si).success( function(data) {
-        cs = [];
-        for( c in data){
-          cs[c] = (data[c]["customer"]);
-        }
-        $scope.customers = cs;
+        $scope.customers = data;
       })
     };
   }
@@ -41,7 +37,12 @@
         
         <ul class="users">
           <li ng-repeat="c in customers | filter:searchText">
-            {{c.family_name}} {{c.first_name}} {{c.phone_number}} {{c.address}}
+            <div>
+            名前: {{c.family_name}} {{c.first_name}} <br />
+            電話番号: {{c.phone_number}} <br />
+            住所: {{c.address}}
+            </div>
+          
           </li>
         </ul>
 

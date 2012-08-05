@@ -12,16 +12,35 @@
   myScope = {};
   
   function GeoController($scope) {
-     $scope.geo = { "lon" :"abcde", "lat" : "fghij" };
-     
-     $scope.places = [
-       { "name" : "a1" , "lat" : 20, "lon" : 20},
-       { "name" : "a2" , "lat" : 50, "lon" : 46}
-     ]
-     $scope.selectPlace = function(place) {
-       myScope.map.setCenter(new google.maps.LatLng(place.lat,place.lon));
-     };
-     
+  
+    $scope.customers = [
+      {"id" : 1 , "name" : "customer1"},
+      {"id" : 2 , "name" : "customer2"}
+    ];
+  
+    $scope.selected = {"id":23,"name" : "no selected", "lat" : 65, "lon" : -135};
+    $scope.selected_land = {"id":23,"name" : "no selected", "lat" : 65, "lon" : -135};
+    $scope.personal_lands = [
+      { "id":1, "name" : "test", "lon" :"130", "lat" : "65" }
+    ];
+    
+    $scope.public_places = [
+      {"id":2, "name" : "a1" , "lat" : 20, "lon" : 20},
+      {"id":3, "name" : "a2" , "lat" : 50, "lon" : 46}
+    ];
+    $scope.selectPlace = function(place) {
+      myScope.map.setCenter(new google.maps.LatLng(place.lat,place.lon));
+      $scope.selected_land = place;
+    };
+    
+    $scope.select_customer = function(customer){
+      $scope.selected = customer;
+      $scope.personal_lands = [
+      { "id":1, "name": customer.name + "'s land", "lon" :"130", "lat" : "65" }
+      ];
+    };
+    
+    
   }
 
   function initialize() {
@@ -37,6 +56,8 @@
     myScope.map = map
     
     $("#accordion").accordion();
+    
+    $("#sample").val("aaa");
   }
 
 </script>
@@ -44,28 +65,41 @@
     </head>
     <body onload="initialize()" ng-controller="GeoController">
         <div>
+        
+        <input id="sample" value="" />
         <label>Name:</label>
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
+        <input type="text" ng-model="yourName" placeholder="Enter a name here" />
         <hr>
         <h1>Hello {{yourName}}!</h1>
         </div>
         
+        お客様:<select>
+          <option>選択してください。</option>
+          <option ng-repeat="c in customers" ng-click="select_customer(c)">{{c.name}}</option>
+        </select>
+        
+        <form>
+          <input type="hidden" name="customer_id" value="{{selected.id}}" /><br />
+          選択された場所:<span>{{selected_land.name}}</span>
+          <input type="hidden" name="land_id" value="{{selected_land.id}}" />
         <div>
           <span>{{geo.lon}}</span><span>{{geo.lat}}</span>
         </div>
 		
 		<div>filter:<input ng-model="placeSeach" /></div>
 		<div id="accordion">
-		  <h3><a href="#">First</a></h3>
+		  <h3><a href="#">個人の所有地</a></h3>
 		  <div>
 		    <ul>
-		    <li ng-repeat="p in places | filter:placeSeach"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
+		    <li ng-repeat="p in personal_lands | filter:placeSeach"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
 		    </ul>
 		  </div>
 		  
-		  <h3><a href="#">Second</a></h3>
+		  <h3><a href="#">地域</a></h3>
 		  <div>
-		    abababa
+		    <ul>
+		      <li ng-repeat="p in public_places | filter:placeSearch"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
+		    </ul>
 		  </div>
 		</div>
 		
