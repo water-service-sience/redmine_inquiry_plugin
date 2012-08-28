@@ -6,10 +6,8 @@ class InquirySearchController < ApplicationController
 
   def find_customers
     
-    #@customers = Customer.find_by_project_id(@project.id,:all)
     q = params[:q]
     likeStr = q + "%"
-    #@customers = Customer.where(["project_id = ?", @project.id]).where(["phone_number like ?",likeStr]).all
     
     s = 
 <<EOS
@@ -25,13 +23,46 @@ EOS
     
     for c in @customers
       list << {"id" => c.id, 
-        "name" => c.family_name + " " + c.first_name,
+        "name" => c.full_name,
         "family_name" => c.family_name, 
         "first_name" => c.first_name,
         "address" => c.address,
         "phone_number" => c.phone_number}
     end
     
+    respond_with(list)
+  end
+  
+  def public_places
+s = 
+<<EOS
+select * from geo_infos where project_id = :pId and 
+  category = 1;
+EOS
+    @places = GeoInfo.find_by_sql([s, { :pId => @project.id}])
+    
+    
+    list = []
+    
+    for c in @places
+      list << {"id" => c.id, 
+        "name" => c.name,
+        "lat" => c.latitude, 
+        "lon" => c.longitude}
+    end
+    
+    respond_with(list)
+    
+  end
+  
+  def own_lands
+    customer_id = params[:customer_id]
+    
+    list = [{
+      "name" => "???",
+      "lat" => 130,
+      "lon" => 50
+    }]
     respond_with(list)
   end
   

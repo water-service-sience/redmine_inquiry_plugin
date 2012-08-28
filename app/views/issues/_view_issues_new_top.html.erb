@@ -23,24 +23,30 @@
     $scope.selected = {"id": -1 ,"name" : "no selected", "lat" : 65, "lon" : -135};
     $scope.selected_land = {"id": -1 ,"name" : "no selected", "lat" : 65, "lon" : -135};
     $scope.personal_lands = [
-      { "id":324, "name" : "test", "lon" :"130", "lat" : "65" }
     ];
     
-    $scope.public_places = [
+    /*$scope.public_places = [
       {"id":2, "name" : "a1" , "lat" : 20, "lon" : 20},
       {"id":3, "name" : "a2" , "lat" : 50, "lon" : 46}
-    ];
+    ];*/
+    
+    $http.get("../../../../geo_info/public_places.json?project_id=" + PROJECT_ID).success( function(data) {
+      $scope.public_places = data;
+    });
     $scope.selectPlace = function(place) {
       myScope.map.setCenter(new google.maps.LatLng(place.lat,place.lon));
       $scope.selected_land = place;
       $j("#geo_info_id").val(place.id);
     };
     
-    $scope.select_customer = function(customer){
-      $scope.selected = customer;
-      $scope.personal_lands = [
+    $scope.select_customer = function(){
+      var customer = $scope.selected;
+      /*$scope.personal_lands = [
       { "id":1, "name": customer.name + "'s land", "lon" :"130", "lat" : "65" }
-      ];
+      ];*/
+      $http.get("../../../../geo_info/own_lands.json?customer_id=" + customer.id + "&project_id=" + PROJECT_ID).success( function(data) {
+        $scope.personal_lands = data;
+      });
       
       $j("#customer_id").val(customer.id);
       
@@ -69,22 +75,23 @@
 </script>
 
 <span ng-app  ng-controller="GeoController">
-    お客様:<select>
-      <option>選択してください。</option>
-      <option ng-repeat="c in customers" ng-click="select_customer(c)">{{c.name}}</option>
-    </select><br />
+    お客様:<select ng-model="selected" 
+	      ng-options="s.name for s in customers"
+	      ng-change="select_customer()">
+	  </select>
+    <br />
     
     選択された場所:<span>{{selected_land.name}}</span>
     <div>
-      <span>{{geo.lon}}</span><span>{{geo.lat}}</span>
+      経度:<span>{{selected_land.lon}}</span>緯度:<span>{{selected_land.lat}}</span>
     </div>
 	
-	<div>filter:<input ng-model="placeSeach" /></div>
+	<div>filter:<input ng-model="placeSearch" /></div>
 	<div id="accordion">
 	  <h3><a href="#">個人の所有地</a></h3>
 	  <div>
 	    <ul>
-	    <li ng-repeat="p in personal_lands | filter:placeSeach"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
+	    <li ng-repeat="p in personal_lands | filter:placeSearch"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
 	    </ul>
 	  </div>
 	  

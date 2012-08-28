@@ -1,0 +1,18 @@
+<h2><%= @customer.full_name %></h2>
+
+
+お問い合わせ一覧
+<table border="1">
+<tr>
+  <td></td><td>タイトル</td><td>場所</td><td></td>
+</tr>
+
+<% for issue,ext in @issues %>
+
+<tr>
+  <td><%= issue.id %></td><td><%= issue.subject %></td><td><%= ext.geo_info_id%></td><td><a href=<%= "../issues/#{issue.id}" %>>詳細</a></td>
+</tr>
+
+<% end %>
+
+</table>

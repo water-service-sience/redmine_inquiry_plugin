@@ -23,6 +23,11 @@ class CustomerController < ApplicationController
     respond_with(@customers)
   end
   
+  def detail
+    find_customer
+    @issues = IssueExtInquiry.for_customer(@customer.id)
+  end
+  
   def list
   end
   
@@ -36,5 +41,12 @@ private
   rescue ActiveRecord::RecordNotFound
     render_404
   end 
+  
+  def find_customer
+    @customer = Customer.find(params[:customer_id])
+  rescue ActiveRecord::RecordNotFound
+    p "Customer#{params[:customer_id]} not found"
+    render_404
+  end
 
 end

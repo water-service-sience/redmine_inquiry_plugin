@@ -38,9 +38,12 @@
         <ul class="users">
           <li ng-repeat="c in customers | filter:searchText">
             <div>
-            名前: {{c.family_name}} {{c.first_name}} <br />
-            電話番号: {{c.phone_number}} <br />
-            住所: {{c.address}}
+            
+            <p>名前: {{c.family_name}} {{c.first_name}}</p>
+            <p>電話番号: {{c.phone_number}}</p>
+            <p>住所: {{c.address}}</p>
+            <a href="customer/detail?customer_id={{c.id}}&project_id=<%= @project.identifier %>">お問い合わせ履歴を見る</a>
+            
             </div>
           
           </li>
