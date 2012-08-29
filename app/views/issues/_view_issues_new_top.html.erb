@@ -16,7 +16,7 @@
       {"id" : 12 , "name" : "customer12"},
       {"id" : 21 , "name" : "customer2"}
     ];*/
-    $http.get("../../../../customer/search.json?project_id=" + PROJECT_ID + "&q=").success( function(data) {
+    $http.get("../../../customer/search.json?project_id=" + PROJECT_ID + "&q=").success( function(data) {
       $scope.customers = data;
     })
   
@@ -30,7 +30,7 @@
       {"id":3, "name" : "a2" , "lat" : 50, "lon" : 46}
     ];*/
     
-    $http.get("../../../../geo_info/public_places.json?project_id=" + PROJECT_ID).success( function(data) {
+    $http.get("../../../geo_info/public_places.json?project_id=" + PROJECT_ID).success( function(data) {
       $scope.public_places = data;
     });
     $scope.selectPlace = function(place) {
@@ -44,7 +44,7 @@
       /*$scope.personal_lands = [
       { "id":1, "name": customer.name + "'s land", "lon" :"130", "lat" : "65" }
       ];*/
-      $http.get("../../../../geo_info/own_lands.json?customer_id=" + customer.id + "&project_id=" + PROJECT_ID).success( function(data) {
+      $http.get("../../../geo_info/own_lands.json?customer_id=" + customer.id + "&project_id=" + PROJECT_ID).success( function(data) {
         $scope.personal_lands = data;
       });
       
