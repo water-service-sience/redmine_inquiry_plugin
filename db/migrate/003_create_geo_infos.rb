@@ -10,9 +10,9 @@ class CreateGeoInfos < ActiveRecord::Migration
 
       t.integer :geo_type
 
-      t.decimal :longitude
+      t.float :longitude
 
-      t.decimal :latitude
+      t.float :latitude
 
 
     end
