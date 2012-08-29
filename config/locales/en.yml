@@ -3,3 +3,10 @@ en:
   my_label: "My label"
   label_customer_new: "New Custoemr"
   label_geo_info_new: "New GeoInfo"
+  field_family_name : "Family name"
+  field_first_name  : "First name"
+  field_address     : "Address"
+  field_phone_number: "Phone number"
+  field_longitude   : "Longitude"
+  field_latitude    : "Latitude"
+  
