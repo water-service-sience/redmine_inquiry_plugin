@@ -5,8 +5,25 @@ module InquiryPlugin
     render_on :view_issues_new_top,
               :partial => 'issues/view_issues_new_top'
     
-    render_on :view_issues_form_details_bottom,
-              :partial => 'issues/view_issues_form_details_bottom'
+              
+    def view_issues_form_details_bottom(context = {})
+      
+      issue = context[:issue]
+      context[:customer_id] = ""
+      context[:geo_info_id] = ""
+      if !issue.nil?
+        ext = IssueExtInquiry.find_by_issue_id(issue.id)
+        if !ext.nil?
+          context[:customer_id] = ext.customer_id
+          context[:geo_info_id] = ext.geo_info_id
+        end
+      end
+      
+      context[:hook_caller].send(:render, {
+        :locals => context,
+        :partial => 'issues/view_issues_form_details_bottom' 
+      })
+    end
               
     def view_issues_show_details_bottom(context = {})
       issue = context[:issue]
