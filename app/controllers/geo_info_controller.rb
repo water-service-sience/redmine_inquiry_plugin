@@ -5,7 +5,7 @@ class GeoInfoController < ApplicationController
 
 
   def index
-    
+    @geo_infos = GeoInfo.where(:project_id => @project.id)
   end
 
 

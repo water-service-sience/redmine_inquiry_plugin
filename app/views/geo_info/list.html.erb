@@ -1,1 +1,15 @@
 <h2>GeoInfoController#list</h2>
+
+
+<table>
+
+  <tr>
+    <td>ID</td><td>name</td><td>Œo“x</td><td>ˆÜ“x</td>
+  </tr>  
+  <% for g in geo_infos %>
+  
+  <tr>
+    <td><%= g.id %></td><td><%= g.name %></td><td><%= g.longitude %></td><td><%= g.latitude %></td>
+  </tr>  
+  <% end %>
+</table>

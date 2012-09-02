@@ -5,3 +5,15 @@
 </div>
 
 
+<table border="1">
+
+  <tr>
+    <td>ID</td><td>name</td><td>GeoType</td><td>経度</td><td>緯度</td>
+  </tr>  
+  <% for g in @geo_infos %>
+  
+  <tr>
+    <td><%= g.id %></td><td><%= g.name %></td><td><%= g.geo_type_label %></td><td><%= g.longitude %></td><td><%= g.latitude %></td>
+  </tr>  
+  <% end %>
+</table>

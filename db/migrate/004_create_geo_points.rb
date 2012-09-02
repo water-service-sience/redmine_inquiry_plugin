@@ -4,9 +4,9 @@ class CreateGeoPoints < ActiveRecord::Migration
 
       t.integer :geo_info_id
 
-      t.decimal :longitude
+      t.float :longitude
 
-      t.decimal :latitude
+      t.float :latitude
 
 
     end

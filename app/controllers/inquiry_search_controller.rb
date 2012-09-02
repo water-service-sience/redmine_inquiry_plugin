@@ -58,13 +58,37 @@ EOS
   def own_lands
     customer_id = params[:customer_id]
     
-    list = [{
-      "name" => "???",
-      "lat" => 130,
-      "lon" => 50
-    }]
+    customer = Customer.find(customer_id)
+    
+    list = []
+    for p in customer.geo_infos
+      list << {
+        "name" => p.name,
+        "lat" => p.latitude,
+        "lon" => p.longitude
+      }
+    end
+    
     respond_with(list)
   end
+  
+  def geo_info
+    g = GeoInfo.find( params[:geo_info_id])
+  
+    data = { 
+      "name" => g.name,
+      "geo_type" => g.geo_type,
+      "center" => [g.latitude,g.longitude],
+    }
+    points = []
+    for p in g.geo_points
+      points << [p.latitude,p.longitude]
+    end
+    data["points"] = points
+    
+    respond_with(data)
+  end
+  
   
 
 private

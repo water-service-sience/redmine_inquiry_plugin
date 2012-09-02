@@ -11,15 +11,9 @@ module InquiryPlugin
     def view_issues_show_details_bottom(context = {})
       issue = context[:issue]
       ext = IssueExtInquiry.find_by_issue_id(issue.id)
-      geo_info = GeoInfo.find(ext.geo_info_id)
-      customer = Customer.find(ext.customer_id)
+      geo_info = GeoInfo.find_by_id(ext.geo_info_id)
+      customer = Customer.find_by_id(ext.customer_id)
       
-      p "#################################"
-      p ""
-      p "#{ext.customer_id} #{ext.geo_info_id}"
-      p "#{geo_info.id} #{customer.id}"
-      p ""
-      p "#################################"
       
       m = context.merge( 
       :extension => ext,
@@ -32,15 +26,11 @@ module InquiryPlugin
       })
     end
     
-    #render_on :view_issues_show_details_bottom,
-    #          :partial => 'issues/view_issues_show_details_bottom'
               
-              
+    def controller_issues_new_before_save(context = {})
     
-    #render_on :view_issues_show_description_bottom,
-    #          :partial => 'issues/view_issues_show_details_bottom'
-              
-  
+      
+    end
 
     def controller_issues_new_after_save(context = {})
       issue = context[:issue]
