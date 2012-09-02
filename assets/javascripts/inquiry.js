@@ -33,6 +33,10 @@ function init_map( map_canvas_id ){
    }
  */
 function set_geo_point( geo_info){
+
+  if(INQUIRY_SCOPE.last_overlay != null){
+    INQUIRY_SCOPE.last_overlay.setMap(null);
+  }
   
   if( geo_info.geo_type == 1){ // point
   }else if(geo_info.geo_type == 2){ // line
@@ -48,6 +52,7 @@ function set_geo_point( geo_info){
       strokeWeight: 2
     });
     polyline.setMap(INQUIRY_SCOPE.map);
+    INQUIRY_SCOPE.last_overlay = polyline
   
   }else if(geo_info.geo_type == 3){ // polygon
   }
