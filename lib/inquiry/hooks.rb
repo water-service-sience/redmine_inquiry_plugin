@@ -2,8 +2,8 @@ module InquiryPlugin
 
   class Hooks < Redmine::Hook::ViewListener
   
-    render_on :view_issues_new_top,
-              :partial => 'issues/view_issues_new_top'
+#    render_on :view_issues_new_top,
+#              :partial => 'issues/view_issues_new_top'
     
               
     def view_issues_form_details_bottom(context = {})
