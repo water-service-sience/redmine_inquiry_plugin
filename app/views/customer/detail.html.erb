@@ -1,16 +1,16 @@
 <h2><%= @customer.full_name %></h2>
 
 
-お問い合わせ一覧
+<h3><%= l("label_inquiry_history") %></h3>
 <table border="1">
 <tr>
-  <td></td><td>タイトル</td><td>場所</td><td></td>
+  <td></td><td><%= l("field_title") %></td><td><%= l("field_place") %></td><td></td>
 </tr>
 
 <% for issue,ext in @issues %>
 
 <tr>
-  <td><%= issue.id %></td><td><%= issue.subject %></td><td><%= ext.geo_info_id%></td><td><a href=<%= "../issues/#{issue.id}" %>>詳細</a></td>
+  <td><%= issue.id %></td><td><%= issue.subject %></td><td><%= ext.geo_info_id%></td><td><a href=<%= "../issues/#{issue.id}" %>><%= l("label_details") %></a></td>
 </tr>
 
 <% end %>

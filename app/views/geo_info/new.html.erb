@@ -37,7 +37,7 @@
   });
 </script>
 
-<h2>新規作成</h2>
+<h2><%= l("label_create") %></h2>
 
 <div>
 
@@ -48,13 +48,13 @@
 <p><%= form.text_field :name,
                        :size => 20, :required => true %>
 <select name="geo_info[category]">
-  <option value="1" selected="selected">公共地</option>
-  <option value="2">個人所有地</option>
+  <option value="1" selected="selected"><%= l("label_common_place") %></option>
+  <option value="2"><%= l("label_own_land") %></option>
 </select></p>
 <p><%= form.text_field :longitude,
                        :size => 20, :required => true, :id => "longitude" %>
    <%= form.text_field :latitude,
-                       :size => 20, :required => true, :id => "latitude" %>※地図をクリックで地点を選択</p>
+                       :size => 20, :required => true, :id => "latitude" %><%= l("tips__geo_info_click_map") %></p>
 </div>
 
 <div id="map_canvas"  style="width:600px; height:400px"></div>

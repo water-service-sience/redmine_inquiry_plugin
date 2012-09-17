@@ -72,26 +72,26 @@
 </script>
 
 <span ng-app  ng-controller="GeoController">
-    お客様:<select ng-model="selected" 
+    <%= l("label_customer") %>:<select ng-model="selected" 
 	      ng-options="s.name for s in customers"
 	      ng-change="select_customer()">
 	  </select>
     <br />
     
-    選択された場所:<span>{{selected_land.name}}</span>
+    <%= l("label_selected_place") %>:<span>{{selected_land.name}}</span>
     <div>
-      経度:<span>{{selected_land.lon}}</span>緯度:<span>{{selected_land.lat}}</span>
+      <%= l("label_longitude") %>:<span>{{selected_land.lon}}</span><%= l("label_latitude") %>:<span>{{selected_land.lat}}</span>
     </div>
 	
 	<div>filter:<input ng-model="placeSearch" /></div>
 	<div id="accordion">
-	  <h3><a href="#">地域</a></h3>
+	  <h3><a href="#"><%= l("label_common_place") %></a></h3>
 	  <div>
 	    <ul>
 	      <li ng-repeat="p in public_places | filter:placeSearch"><div ng-click="selectPlace(p);">{{p.name}}</div></li>
 	    </ul>
 	  </div>
-	  <h3><a href="#">個人の所有地</a></h3>
+	  <h3><a href="#"><%= l("label_own_land") %></a></h3>
 	  <div>
 	    <ul>
 	    <li ng-repeat="p in personal_lands | filter:placeSearch"><div ng-click="selectPlace(p);">{{p.name}}</div></li>

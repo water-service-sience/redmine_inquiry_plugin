@@ -1,13 +1,13 @@
 
 <%= error_messages_for 'customer' %>
 <div class="box">
-<p>姓:<%= form.text_field :family_name,
+<p><%= l("field_family_name") %>:<%= form.text_field :family_name,
                        :size => 100, :required => true %></p>
-<p>名:<%= form.text_field :first_name,
+<p><%= l("field_first_name") %>:<%= form.text_field :first_name,
                        :size => 100, :required => true %></p>
-<p>住所:<%= form.text_field :address,
+<p><%= l("field_address") %>:<%= form.text_field :address,
                        :size => 100, :required => true %></p>
-<p>電話番号:<%= form.text_field :phone_number,
+<p><%= l("field_phone_number") %>:<%= form.text_field :phone_number,
                        :size => 100, :required => true %></p>
                        
 </div>

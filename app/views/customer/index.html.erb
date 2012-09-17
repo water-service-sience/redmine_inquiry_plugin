@@ -26,23 +26,23 @@
 </script>
 
 
-<h2>お客様情報</h2>
+<h2><%= l("label_customer_info") %></h2>
 
 <div  ng-app ng-controller="CustomerController">
 
         <div>
-          メイン検索:<input ng-model="s1" ng-change="change(s1)" /> <br />
-          サブ検索:<input ng-model="searchText" /> <br />
+          <%= l("label_search") %>:<input ng-model="s1" ng-change="change(s1)" /> <br />
+          <%= l("label_refinement") %>:<input ng-model="searchText" /> <br />
         </div>
         
         <ul class="users">
           <li ng-repeat="c in customers | filter:searchText">
             <div>
             
-            <p>名前: {{c.family_name}} {{c.first_name}}</p>
-            <p>電話番号: {{c.phone_number}}</p>
-            <p>住所: {{c.address}}</p>
-            <a href="customer/detail?customer_id={{c.id}}&project_id=<%= @project.identifier %>">お問い合わせ履歴を見る</a>
+            <p><%= l("label_name") %>: {{c.family_name}} {{c.first_name}}</p>
+            <p><%= l("label_phone_number") %>: {{c.phone_number}}</p>
+            <p><%= l("label_address") %>: {{c.address}}</p>
+            <a href="customer/detail?customer_id={{c.id}}&project_id=<%= @project.identifier %>"><%= l("label_inquiry_history") %></a>
             
             </div>
           

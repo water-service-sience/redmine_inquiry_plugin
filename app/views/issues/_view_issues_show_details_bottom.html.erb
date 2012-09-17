@@ -26,12 +26,12 @@
 
 <span>
     
-    お客様:<span><%= customer.full_name() if !customer.nil?  %></span>
+    <%= l("label_customer") %>:<span><%= customer.full_name() if !customer.nil?  %></span>
     <div>
-    選択された場所:<span><%= geo_info.name if !geo_info.nil? %></span>
+    <%= l("label_selected_place") %>:<span><%= geo_info.name if !geo_info.nil? %></span>
     </div>
     <div>
-      緯度:<span><%= geo_info.latitude if !geo_info.nil? %></span> 経度:<span><%= geo_info.longitude if !geo_info.nil? %></span>
+      <%= l("label_longitude") %>:<span><%= geo_info.longitude if !geo_info.nil? %></span><%= l("label_longitude") %>:<span><%= geo_info.latitude if !geo_info.nil? %></span>
     </div>
 	
 	<div id="map_canvas" style="width:300px; height:200px"></div>
